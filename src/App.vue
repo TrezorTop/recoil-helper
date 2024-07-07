@@ -8,6 +8,14 @@ const onAdd = () => {
   hotkeys.value.push("");
 };
 
+document.addEventListener('mousedown', () => {
+  invoke('start_mouse_move')
+})
+
+document.addEventListener('mouseup', () => {
+  invoke('stop_mouse_move')
+})
+
 const onKeydown = (event: KeyboardEvent, index: number) => {
   console.log(event);
   hotkeys.value[index] = event.key;

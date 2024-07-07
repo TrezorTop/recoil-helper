@@ -3,9 +3,7 @@
 
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::time::Duration;
-
-use tauri::Manager;
+use std::time::{Duration, Instant};
 
 use crate::app_state::AppState;
 
@@ -18,6 +16,7 @@ fn main() {
     start_mouse_move_thread(
         Arc::clone(&app_state.running),
         Arc::clone(&app_state.closed),
+        Arc::clone(&app_state.pattern),
     );
 
     tauri::Builder::default()
@@ -27,28 +26,46 @@ fn main() {
         .expect("error while running tauri application");
 }
 
-fn start_mouse_move_thread(running: Arc<Mutex<bool>>, closed: Arc<Mutex<bool>>) {
-    thread::spawn(move || loop {
-        // creating a new scope to release the lock fast as possible
-        let should_run = {
-            let is_running = running.lock().unwrap();
-            *is_running
-        };
+fn start_mouse_move_thread(
+    running: Arc<Mutex<bool>>,
+    closed: Arc<Mutex<bool>>,
+    pattern: Arc<Mutex<Vec<app_state::PatternPart>>>,
+) {
+    thread::spawn(move || {
+        let mut pattern_index = 0;
+        let mut timer = Instant::now();
 
-        let app_closed = {
-            let is_closed = closed.lock().unwrap();
-            *is_closed
-        };
+        loop {
+            if *closed.lock().unwrap() {
+                break;
+            }
 
-        if should_run {
-            mouse_controller::send_mouse_input(0, 10);
+            let should_run = *running.lock().unwrap();
+
+            if should_run {
+                let pattern_guard = pattern.lock().unwrap();
+
+                if pattern_index >= pattern_guard.len() {
+                    pattern_index = 0;
+                }
+
+                let current_pattern_part = &pattern_guard[pattern_index];
+
+                mouse_controller::send_mouse_input(current_pattern_part.x, current_pattern_part.y);
+
+                if timer.elapsed() >= Duration::from_millis(current_pattern_part.delay)
+                    && pattern_index < pattern_guard.len() - 1
+                {
+                    pattern_index = (pattern_index + 1) % pattern_guard.len();
+                    timer = Instant::now();
+                }
+            } else {
+                pattern_index = 0;
+                timer = Instant::now();
+            }
+
+            thread::sleep(Duration::from_millis(16));
         }
-
-        if app_closed {
-            break;
-        }
-
-        thread::sleep(Duration::from_millis(16));
     });
 }
 
