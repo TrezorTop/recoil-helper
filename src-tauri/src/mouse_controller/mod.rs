@@ -1,5 +1,16 @@
 use winapi::um::winuser::{SendInput, INPUT, INPUT_MOUSE, MOUSEEVENTF_MOVE, MOUSEINPUT};
 
+/// Sends a mouse input event to the system.
+///
+/// This function takes the horizontal and vertical movement deltas as `i32` values and sends a mouse input event to the system
+/// using the `SendInput` function from the `winapi` crate.
+///
+/// The `init_mouse_input` function is used to create a `MOUSEINPUT` struct with the provided movement deltas, which is then
+/// converted to an `INPUT` struct and passed to `SendInput`.
+///
+/// # Arguments
+/// * `dx` - The horizontal movement delta.
+/// * `dy` - The vertical movement delta.
 pub fn send_mouse_input(dx: i32, dy: i32) {
     let mouse_input = init_mouse_input(dx, dy);
 
@@ -19,6 +30,16 @@ pub fn send_mouse_input(dx: i32, dy: i32) {
     }
 }
 
+/// Initializes a `MOUSEINPUT` struct with the provided horizontal and vertical movement deltas.
+///
+/// This function is used to create a `MOUSEINPUT` struct with the given `dx` and `dy` values, which can then be used to send a mouse input event to the system using the `send_mouse_input` function.
+///
+/// # Arguments
+/// * `dx` - The horizontal movement delta.
+/// * `dy` - The vertical movement delta.
+///
+/// # Returns
+/// A `MOUSEINPUT` struct with the provided movement deltas.
 fn init_mouse_input(dx: i32, dy: i32) -> MOUSEINPUT {
     // This is a common pattern when working with FFI (Foreign Function Interface).
     // std::mem::zeroed() is used to initialize a MOUSEINPUT struct with all fields set to zero (every byte is 0).
