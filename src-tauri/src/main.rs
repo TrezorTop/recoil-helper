@@ -1,17 +1,20 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::{env, thread};
 use std::sync::{Arc, Mutex};
-use std::thread;
 use std::time::{Duration, Instant};
 
-use crate::app_state::AppState;
+use crate::app_state::{AppState, PatternPart};
 
 mod app_state;
+mod json;
 mod mouse_controller;
 
 fn main() {
-    let app_state = AppState::new();
+    let mut app_state = AppState::new();
+    
+    app_state.set_pattern(String::from("test"));
 
     start_mouse_move_thread(
         Arc::clone(&app_state.running),
@@ -29,7 +32,7 @@ fn main() {
 fn start_mouse_move_thread(
     running: Arc<Mutex<bool>>,
     closed: Arc<Mutex<bool>>,
-    pattern: Arc<Mutex<Vec<app_state::PatternPart>>>,
+    pattern: Arc<Mutex<Vec<PatternPart>>>,
 ) {
     thread::spawn(move || {
         let mut pattern_index = 0;
