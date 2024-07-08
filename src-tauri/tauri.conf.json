@@ -37,7 +37,9 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [
+        "config.json"
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {
@@ -56,7 +58,7 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
+        "resizable": false,
         "title": "Recoil Helper",
         "width": 800
       }
