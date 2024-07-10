@@ -1,17 +1,55 @@
-use winapi::um::winuser::{SendInput, INPUT, INPUT_MOUSE, MOUSEEVENTF_MOVE, MOUSEINPUT};
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::{Duration, Instant};
 
-/// Sends a mouse input event to the system.
-///
-/// This function takes the horizontal and vertical movement deltas as `i32` values and sends a mouse input event to the system
-/// using the `SendInput` function from the `winapi` crate.
-///
-/// The `init_mouse_input` function is used to create a `MOUSEINPUT` struct with the provided movement deltas, which is then
-/// converted to an `INPUT` struct and passed to `SendInput`.
-///
-/// # Arguments
-/// * `dx` - The horizontal movement delta.
-/// * `dy` - The vertical movement delta.
-pub fn send_mouse_input(dx: i32, dy: i32) {
+use winapi::um::winuser::{
+    GetAsyncKeyState, SendInput, INPUT, INPUT_MOUSE, MOUSEEVENTF_MOVE, MOUSEINPUT, VK_LBUTTON,
+    VK_RBUTTON,
+};
+
+use crate::app_state::PatternPart;
+
+pub fn start_mouse_move_thread(closed: Arc<Mutex<bool>>, pattern: Arc<Mutex<Vec<PatternPart>>>) {
+    thread::spawn(move || {
+        let mut pattern_index = 0;
+        let mut timer = Instant::now();
+        let thread_sleep_duration = Duration::from_millis(16);
+
+        loop {
+            if *closed.lock().unwrap() {
+                break;
+            }
+
+            let should_run = should_run();
+
+            if should_run {
+                let pattern_guard = pattern.lock().unwrap();
+
+                if pattern_index >= pattern_guard.len() {
+                    pattern_index = 0;
+                }
+
+                let current_pattern_part = &pattern_guard[pattern_index];
+
+                send_mouse_input(current_pattern_part.x, current_pattern_part.y);
+
+                if timer.elapsed() >= Duration::from_millis(current_pattern_part.delay)
+                    && pattern_index < pattern_guard.len() - 1
+                {
+                    pattern_index = (pattern_index + 1) % pattern_guard.len();
+                    timer = Instant::now();
+                }
+            } else {
+                pattern_index = 0;
+                timer = Instant::now();
+            }
+
+            thread::sleep(thread_sleep_duration);
+        }
+    });
+}
+
+fn send_mouse_input(dx: i32, dy: i32) {
     let mouse_input = init_mouse_input(dx, dy);
 
     // INPUT struct is used to send input events to the system.
@@ -30,16 +68,6 @@ pub fn send_mouse_input(dx: i32, dy: i32) {
     }
 }
 
-/// Initializes a `MOUSEINPUT` struct with the provided horizontal and vertical movement deltas.
-///
-/// This function is used to create a `MOUSEINPUT` struct with the given `dx` and `dy` values, which can then be used to send a mouse input event to the system using the `send_mouse_input` function.
-///
-/// # Arguments
-/// * `dx` - The horizontal movement delta.
-/// * `dy` - The vertical movement delta.
-///
-/// # Returns
-/// A `MOUSEINPUT` struct with the provided movement deltas.
 fn init_mouse_input(dx: i32, dy: i32) -> MOUSEINPUT {
     // This is a common pattern when working with FFI (Foreign Function Interface).
     // std::mem::zeroed() is used to initialize a MOUSEINPUT struct with all fields set to zero (every byte is 0).
@@ -60,4 +88,9 @@ fn init_mouse_input(dx: i32, dy: i32) -> MOUSEINPUT {
     mouse_input.dwExtraInfo = 0;
 
     mouse_input
+}
+
+fn should_run() -> bool {
+    (unsafe { GetAsyncKeyState(VK_LBUTTON) } & 0x8000u16 as i16 != 0)
+        && (unsafe { GetAsyncKeyState(VK_RBUTTON) } & 0x8000u16 as i16 != 0)
 }
