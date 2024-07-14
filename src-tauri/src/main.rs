@@ -24,7 +24,18 @@ fn main() {
     // Run the Tauri application.
     tauri::Builder::default()
         .manage(app_state)
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![set_active_pattern])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+/// Sets the active pattern in the application state.
+///
+/// This function takes the current application state, locks it, and sets the active pattern to the provided `pattern_name`.
+/// The application state is managed using a shared `Arc<Mutex<AppState>>` instance, which is passed to this function.
+/// This function is exposed as a Tauri command, allowing the frontend to interact with the backend to set the active pattern.
+#[tauri::command]
+fn set_active_pattern(app_state: tauri::State<Arc<Mutex<AppState>>>, pattern_name: String) {
+    let mut app_state = app_state.lock().unwrap();
+    app_state.set_active_pattern(&pattern_name);
 }
