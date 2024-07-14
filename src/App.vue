@@ -1,15 +1,31 @@
 <script setup lang="ts">
-import Patterns from "./Patterns/Patterns.vue";
+import { BackendService } from "./services/backend.service.ts";
+
+const config = BackendService.getConfig();
+
+const onPatternSelect = (name: string) => {
+  BackendService.setActivePattern(name);
+};
 </script>
 
 <template>
   <div class="app">
-    <Patterns />
+    <button
+      v-for="(_, key) in config.patterns"
+      :key="key"
+      @click="onPatternSelect(key as string)"
+    >
+      {{ key }}
+    </button>
   </div>
 </template>
 
 <style scoped>
 .app {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
   padding: 32px;
 }
 </style>

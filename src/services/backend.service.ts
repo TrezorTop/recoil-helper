@@ -1,16 +1,18 @@
-import { invoke } from "@tauri-apps/api";
 import config from "../../config.json";
+import { invoke } from "@tauri-apps/api";
 
 export type Config = {
-  patterns: {
-    [key: string]: Pattern[];
-  };
+  patterns: Patterns;
 };
 
-type Pattern = {
-  x: number;
-  y: number;
-  delay: number;
+type Patterns = {
+  [key: string]: Step[];
+};
+
+type Step = {
+  dx: number;
+  dy: number;
+  duration: number;
 };
 
 export const BackendService = {
@@ -18,11 +20,9 @@ export const BackendService = {
     return config;
   },
 
-  saveConfig: async (config: Config) => {
-    await invoke("save_config", { config });
-  },
-
-  reloadConfig: async () => {
-    await invoke("reload_config");
+  setActivePattern: async (name: string) => {
+    await invoke("set_active_pattern", {
+      patternName: name,
+    });
   },
 };
