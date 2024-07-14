@@ -7,86 +7,100 @@ use winapi::um::winuser::{
     VK_RBUTTON,
 };
 
-use crate::app_state::PatternPart;
+use crate::app_state::AppState;
 
-pub fn start_mouse_move_thread(closed: Arc<Mutex<bool>>, pattern: Arc<Mutex<Vec<PatternPart>>>) {
+/// The duration in milliseconds that the mouse controller thread should sleep between iterations.
+/// This constant is used to control the frequency at which the mouse input is updated.
+pub const THREAD_SLEEP_DURATION_MS: u64 = 16;
+
+/// Starts the mouse controller thread that updates the mouse position based on the active pattern in the `AppState`.
+///
+/// The mouse controller thread runs in a loop, checking if the left and right mouse buttons are pressed.
+/// If so, it retrieves the active pattern from the `AppState` and sends mouse input for each step in the pattern.
+/// The thread sleeps for a short duration between iterations to control the frequency of mouse updates.
+///
+/// If the left and right mouse buttons are not pressed, the thread resets the current step index and the last step time.
+pub fn start_mouse_controller(app_state: Arc<Mutex<AppState>>) {
+    // Create a new thread that runs the mouse controller loop.
     thread::spawn(move || {
-        let mut pattern_index = 0;
-        let mut timer = Instant::now();
-        let thread_sleep_duration = Duration::from_millis(16);
+        // Variables to track the pattern progress.
+        let mut current_step_index = 0;
+        let mut last_step_time = Instant::now();
 
         loop {
-            if *closed.lock().unwrap() {
-                break;
-            }
+            if should_run() {
+                // Lock the app state and retrieve the current pattern.
+                let app_state = app_state.lock().unwrap();
+                let pattern = &app_state.active_pattern;
 
-            let should_run = should_run();
+                // Retrieve the current step and send mouse input for the current step.
+                let step = &pattern[current_step_index];
 
-            if should_run {
-                let pattern_guard = pattern.lock().unwrap();
+                // Send the mouse input for the current step.
+                send_mouse_input(step.dx, step.dy);
 
-                if pattern_index >= pattern_guard.len() {
-                    pattern_index = 0;
-                }
-
-                let current_pattern_part = &pattern_guard[pattern_index];
-
-                send_mouse_input(current_pattern_part.x, current_pattern_part.y);
-
-                if timer.elapsed() >= Duration::from_millis(current_pattern_part.delay)
-                    && pattern_index < pattern_guard.len() - 1
+                // Moving to the next step in the pattern if the current step is not the last
+                // and the duration of the current step has elapsed.
+                if current_step_index + 1 < pattern.len()
+                    && last_step_time.elapsed() >= Duration::from_millis(step.duration)
                 {
-                    pattern_index = (pattern_index + 1) % pattern_guard.len();
-                    timer = Instant::now();
+                    // Increment the current step index and reset the last step time.
+                    current_step_index += 1;
+                    last_step_time = Instant::now();
                 }
             } else {
-                pattern_index = 0;
-                timer = Instant::now();
+                current_step_index = 0;
+                last_step_time = Instant::now();
             }
 
-            thread::sleep(thread_sleep_duration);
+            // Sleep for a short duration to control the frequency of mouse updates.
+            thread::sleep(Duration::from_millis(THREAD_SLEEP_DURATION_MS));
         }
     });
 }
 
+/// Sends mouse input to the operating system.
+///
+/// This function creates a `MOUSEINPUT` struct with the provided `dx` and `dy` values, and then
+/// sends the input to the operating system using the `SendInput` function.
+///
+/// # Arguments
+/// * `dx` - The horizontal mouse movement in pixels.
+/// * `dy` - The vertical mouse movement in pixels.
 fn send_mouse_input(dx: i32, dy: i32) {
     let mouse_input = init_mouse_input(dx, dy);
 
-    // INPUT struct is used to send input events to the system.
-    let mut input = INPUT {
+    let input = INPUT {
         type_: INPUT_MOUSE,
-        u: {
-            // std::mem::transmute() is used to convert a MOUSEINPUT struct to a MOUSEINPUT union.
-            // This is necessary because the INPUT struct is a C union that can represent different types of input events,
-            // and Rust does not directly support unions in the same way C does.
-            unsafe { std::mem::transmute(mouse_input) }
-        },
+        u: unsafe { std::mem::zeroed() },
     };
 
+    let mut input_union = input;
     unsafe {
-        SendInput(1, &mut input, std::mem::size_of::<INPUT>() as i32);
+        *input_union.u.mi_mut() = mouse_input;
+    }
+
+    unsafe {
+        SendInput(1, &mut input_union, std::mem::size_of::<INPUT>() as i32);
     }
 }
 
+/// Initializes a `MOUSEINPUT` struct with the provided horizontal and vertical movement values.
+///
+/// This function creates a `MOUSEINPUT` struct with the specified `dx` and `dy` values,
+/// and sets the `dwFlags` field to `MOUSEEVENTF_MOVE` to indicate that the input represents mouse movement.
+///
+/// # Arguments
+/// * `dx` - The horizontal mouse movement in pixels.
+/// * `dy` - The vertical mouse movement in pixels.
+///
+/// # Returns
+/// A `MOUSEINPUT` struct with the specified movement values and the `MOUSEEVENTF_MOVE` flag set.
 fn init_mouse_input(dx: i32, dy: i32) -> MOUSEINPUT {
-    // This is a common pattern when working with FFI (Foreign Function Interface).
-    // std::mem::zeroed() is used to initialize a MOUSEINPUT struct with all fields set to zero (every byte is 0).
-    // Since MOUSEINPUT is a C-style struct with primitive integer fields,
-    // using std::mem::zeroed() to initialize it to zero is safe and appropriate.
     let mut mouse_input: MOUSEINPUT = unsafe { std::mem::zeroed() };
-    // horizontal movement
     mouse_input.dx = dx;
-    // vertical movement
     mouse_input.dy = dy;
-    // mouse wheel movement
-    mouse_input.mouseData = 0;
-    // mouse button state
     mouse_input.dwFlags = MOUSEEVENTF_MOVE;
-    // time stamp for the event (let system decide)
-    mouse_input.time = 0;
-    // no extra info
-    mouse_input.dwExtraInfo = 0;
-
     mouse_input
 }
 

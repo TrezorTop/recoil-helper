@@ -1,61 +1,49 @@
-use std::sync::{Arc, Mutex};
+use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
 use crate::json;
-use crate::json::Config;
 
+/// The application state, containing the active pattern and the overall configuration.
 pub struct AppState {
-    pub closed: Arc<Mutex<bool>>,
-    pub pattern: Arc<Mutex<Vec<PatternPart>>>,
-    pub pattern_name: String,
-    pub config: Config,
+    pub active_pattern: Pattern,
+
+    config: Config,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct PatternPart {
-    pub x: i32,
-    pub y: i32,
-    pub delay: u64,
+/// The configuration for the application, containing the available patterns.
+#[derive(Serialize, Deserialize)]
+pub struct Config {
+    patterns: Patterns,
 }
 
-impl AppState {
-    pub fn new() -> Self {
+type Pattern = Vec<Step>;
+
+type Patterns = HashMap<String, Pattern>;
+
+/// A step in a pattern, containing the x and y offsets and the duration of the step.
+///
+/// This struct represents a single step in a pattern, which includes the x and y offsets
+/// that define the movement of the step, as well as the duration of the step in milliseconds.
+/// The `dx` and `dy` fields define the change in x and y coordinates, respectively, and the
+/// `duration` field defines the time in milliseconds that the step should last.
+#[derive(Serialize, Deserialize, Copy, Clone)]
+pub struct Step {
+    pub dx: i32,
+    pub dy: i32,
+    pub duration: u64,
+}
+
+impl Default for AppState {
+    fn default() -> Self {
         let config = json::read_config().unwrap();
+
+        let first_pattern = config.patterns.values().next().unwrap();
+        let active_pattern = (*first_pattern).clone();
 
         AppState {
-            closed: Arc::new(Mutex::new(false)),
-            pattern: Arc::new(Mutex::new(vec![])),
-            pattern_name: String::from(""),
+            active_pattern,
             config,
         }
-    }
-
-    pub fn reload_config(&mut self) {
-        let config = json::read_config().unwrap();
-
-        self.config = config;
-
-        self.set_pattern(self.pattern_name.clone());
-    }
-
-    pub fn set_pattern(&mut self, name: String) {
-        let mut pattern = self.pattern.lock().unwrap();
-
-        match self.config.patterns.get(&name) {
-            None => {
-                pattern.clear();
-                self.pattern_name.clear();
-            }
-            Some(p) => {
-                *pattern = p.to_owned();
-                self.pattern_name = name;
-            }
-        }
-    }
-
-    pub fn stop(&self) {
-        let mut closed = self.closed.lock().unwrap();
-        *closed = true;
     }
 }
