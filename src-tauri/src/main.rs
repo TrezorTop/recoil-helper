@@ -2,12 +2,14 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::sync::{Arc, Mutex};
+use std::thread;
 
 use crate::app_state::AppState;
 
 mod app_state;
 mod json;
 mod mouse_controller;
+mod screen_reader;
 
 /// The main entry point for the application.
 ///
@@ -24,7 +26,7 @@ fn main() {
     // Run the Tauri application.
     tauri::Builder::default()
         .manage(app_state)
-        .invoke_handler(tauri::generate_handler![set_active_pattern])
+        .invoke_handler(tauri::generate_handler![set_active_pattern, find_image])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
@@ -38,4 +40,11 @@ fn main() {
 fn set_active_pattern(app_state: tauri::State<Arc<Mutex<AppState>>>, pattern_name: String) {
     let mut app_state = app_state.lock().unwrap();
     app_state.set_active_pattern(&pattern_name);
+}
+
+#[tauri::command]
+fn find_image() {
+    thread::spawn(|| {
+        screen_reader::contains_image();
+    });
 }

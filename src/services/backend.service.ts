@@ -1,4 +1,4 @@
-import config from "../../config.json";
+import config from "../../resources/config.json";
 import { invoke } from "@tauri-apps/api";
 
 export type Config = {
@@ -24,5 +24,8 @@ export const BackendService = {
     await invoke("set_active_pattern", {
       patternName: name,
     });
+  },
+  findImage: async () => {
+    await invoke("find_image");
   },
 };

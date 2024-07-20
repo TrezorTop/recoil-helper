@@ -1,0 +1,23 @@
+{
+  "patterns": {
+    "default": [
+      {
+        "dx": 0,
+        "dy": 5,
+        "duration": 1000
+      },
+      {
+        "dx": 3,
+        "dy": 10,
+        "duration": 750
+      }
+    ],
+    "m4": [
+      {
+        "dx": 0,
+        "dy": 100,
+        "duration": 750
+      }
+    ]
+  }
+}

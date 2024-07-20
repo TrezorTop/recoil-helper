@@ -38,7 +38,7 @@
         "signingIdentity": null
       },
       "resources": [
-        "../config.json"
+        "../resources/config.json"
       ],
       "shortDescription": "",
       "targets": "all",
