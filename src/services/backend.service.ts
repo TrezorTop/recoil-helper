@@ -25,7 +25,4 @@ export const BackendService = {
       patternName: name,
     });
   },
-  findImage: async () => {
-    await invoke("find_image");
-  },
 };

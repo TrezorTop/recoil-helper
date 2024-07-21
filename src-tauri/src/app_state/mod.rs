@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::error::Error;
 
 use serde::{Deserialize, Serialize};
 
@@ -35,15 +36,19 @@ pub struct Step {
 }
 
 impl Default for AppState {
-    /// Creates a new `AppState` instance with the default configuration.
+    /// Provides a default implementation for the `AppState` struct.
     ///
-    /// This method reads the application configuration from a JSON file and initializes the `AppState`
-    /// struct with the default active pattern and the loaded configuration. The active pattern is
-    /// set to the first pattern found in the `config.patterns` map.
+    /// This implementation reads the application configuration from a JSON file using the `json::read_config()`
+    /// function, and sets the `active_pattern` field to the first pattern found in the configuration.
+    /// If no patterns are found in the configuration, an error is returned.
     fn default() -> Self {
-        let config = json::read_config().unwrap();
-
-        let active_pattern = config.patterns.values().next().unwrap().clone();
+        let config = json::read_config().expect("Failed to read config");
+        let active_pattern = config
+            .patterns
+            .values()
+            .next()
+            .expect("No patterns found in config")
+            .clone();
 
         AppState {
             active_pattern,
@@ -55,28 +60,27 @@ impl Default for AppState {
 impl AppState {
     /// Reads the application configuration from a JSON file and updates the `config` field of the `AppState` struct.
     ///
-    /// This method is responsible for loading the application configuration from a JSON file and updating the `config` field
-    /// of the `AppState` struct with the loaded configuration. The configuration is expected to be in a valid JSON format
-    /// and contain the necessary information for the application, such as the available patterns.
-    pub fn read_config(&mut self) {
-        let config = json::read_config().unwrap();
+    /// This method reads the configuration from a JSON file using the `json::read_config()` function and assigns the
+    /// resulting `Config` struct to the `config` field of the `AppState` struct. If the configuration file cannot be
+    /// read or parsed, an error is returned.
+    pub fn read_config(&mut self) -> Result<(), Box<dyn Error>> {
+        let config = json::read_config()?;
         self.config = config;
+
+        Ok(())
     }
 
     /// Sets the active pattern in the `AppState` to the pattern with the given name.
     ///
-    /// If a pattern with the given name is found in the `config.patterns` map, it is cloned and
-    /// assigned to the `active_pattern` field of the `AppState`. If no pattern is found with the
-    /// given name, a warning is printed to the console.
-    pub fn set_active_pattern(&mut self, name: &str) {
-        let pattern = self.config.patterns.get(name);
-
-        match pattern {
-            None => {
-                eprintln!("No pattern found with name: {}", name);
-            }
+    /// This method looks up the pattern with the given name in the `config.patterns` map and
+    /// updates the `active_pattern` field of the `AppState` struct with the found pattern.
+    /// If no pattern is found with the given name, an error is returned.
+    pub fn set_active_pattern(&mut self, name: &str) -> Result<(), Box<dyn Error>> {
+        match self.config.patterns.get(name) {
+            None => Err(format!("No pattern found with name: {}", name).into()),
             Some(value) => {
                 self.active_pattern.clone_from(value);
+                Ok(())
             }
         }
     }

@@ -6,9 +6,6 @@ const config = BackendService.getConfig();
 const onPatternSelect = (name: string) => {
   BackendService.setActivePattern(name);
 };
-const findImage = () => {
-  BackendService.findImage()
-}
 </script>
 
 <template>
@@ -20,8 +17,6 @@ const findImage = () => {
     >
       {{ key }}
     </button>
-
-    <button @click="findImage">find image</button>
   </div>
 </template>
 
