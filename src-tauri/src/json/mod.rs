@@ -3,12 +3,8 @@ use std::io::Write;
 
 use crate::app_state::{Config, Step};
 
-/// Reads the configuration from the "../resources/config.json" file and returns a `Config` struct.
-///
-/// # Errors
-/// This function will return an error if there is a problem opening or parsing the configuration file.
 pub fn read_config() -> Result<Config, std::io::Error> {
-    let file = File::open("../resources/config.json")
+    let file = File::open("resources/config.json")
         .map_err(|e| std::io::Error::new(e.kind(), format!("Failed to open config file: {}", e)))?;
 
     let mut config: Config = serde_json::from_reader(file).map_err(|e| {
@@ -23,10 +19,6 @@ pub fn read_config() -> Result<Config, std::io::Error> {
     Ok(config)
 }
 
-/// Writes the configuration to the "../resources/config.json" file.
-///
-/// # Errors
-/// This function will return an error if there is a problem serializing the configuration or writing to the configuration file.
 pub fn write_config(config: &mut Config) -> Result<(), std::io::Error> {
     fix_config(config)?;
 
@@ -37,7 +29,7 @@ pub fn write_config(config: &mut Config) -> Result<(), std::io::Error> {
         )
     })?;
 
-    let mut file = File::create("../resources/config.json").map_err(|e| {
+    let mut file = File::create("resources/config.json").map_err(|e| {
         std::io::Error::new(e.kind(), format!("Failed to create config file: {}", e))
     })?;
 
