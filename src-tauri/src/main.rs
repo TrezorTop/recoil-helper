@@ -45,6 +45,6 @@ fn set_active_pattern(app_state: tauri::State<Arc<Mutex<AppState>>>, pattern_nam
 #[tauri::command]
 fn find_image() {
     thread::spawn(|| {
-        screen_reader::contains_image();
+        screen_reader::screen_contains_image();
     });
 }
