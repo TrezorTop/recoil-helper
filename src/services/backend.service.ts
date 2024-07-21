@@ -1,4 +1,4 @@
-import config from "../../resources/config.json";
+import config from "../../src-tauri/resources/config.json";
 import { invoke } from "@tauri-apps/api";
 
 export type Config = {
