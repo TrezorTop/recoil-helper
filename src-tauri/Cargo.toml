@@ -24,3 +24,4 @@ log = "0.4.27"
 tauri = { version = "2.5.1", features = [] }
 tauri-plugin-log = "2.5.0"
 winapi = { version = "0.3.9", features = ["winuser"] }
+opencv = "0.94.4"
