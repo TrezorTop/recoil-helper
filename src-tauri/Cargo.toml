@@ -18,9 +18,9 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2.2.0", features = [] }
 
 [dependencies]
-serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-log = "0.4"
-tauri = { version = "2.5.0", features = [] }
-tauri-plugin-log = "2.0.0-rc"
+serde_json = "1.0.140"
+serde = { version = "1.0.219", features = ["derive"] }
+log = "0.4.27"
+tauri = { version = "2.5.1", features = [] }
+tauri-plugin-log = "2.5.0"
 winapi = { version = "0.3.9", features = ["winuser"] }

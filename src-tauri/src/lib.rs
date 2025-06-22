@@ -5,25 +5,20 @@ use tauri::Manager;
 mod mouse_controller;
 
 /// Default sleep duration between pattern processing iterations
-pub const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 8;
+pub const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
 
 /// Default recoil compensation pattern
 fn default_pattern() -> Pattern {
     vec![
         Step {
             dx: 0,
-            dy: 5,
-            duration: 250,
+            dy: 50,
+            duration: 100,
         },
         Step {
-            dx: 0,
-            dy: 10,
-            duration: 250,
-        },
-        Step {
-            dx: 0,
-            dy: 25,
-            duration: 250,
+            dx: -2,
+            dy: 45,
+            duration: 0,
         },
     ]
 }

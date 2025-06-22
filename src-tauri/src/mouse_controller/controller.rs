@@ -10,15 +10,32 @@ use crate::mouse_controller::utils::{send_mouse_input, should_run};
 use crate::DEFAULT_THREAD_SLEEP_DURATION_MS;
 
 /// Controller for programmatic mouse movements
+///
+/// This struct is the main entry point for the mouse controller functionality.
+/// It manages a background thread that applies mouse movements according to a
+/// configured pattern when specific conditions are met (e.g., when certain
+/// mouse buttons are pressed).
 pub struct MouseController {
+    /// Shared state that can be accessed and modified by both the controller
+    /// and the background thread. Protected by a read-write lock to ensure
+    /// thread safety.
     state: Arc<std::sync::RwLock<MouseControllerState>>,
 }
 
 impl MouseController {
     /// Creates a new MouseController and automatically starts the internal thread
     ///
+    /// This is the main constructor for the MouseController. It initializes the
+    /// controller with an empty pattern and starts a background thread that will
+    /// monitor mouse button states and apply the pattern when conditions are met.
+    ///
+    /// # Thread Management
+    /// This method spawns a background thread that runs for the lifetime of the
+    /// program. The thread is not joined or stopped explicitly, as it's expected
+    /// to run until program termination.
+    ///
     /// # Returns
-    /// A MouseController that can be used to update the pattern
+    /// A MouseController instance that can be used to update the movement pattern
     pub fn create() -> Self {
         // Create a shared state with an empty pattern
         let state = Arc::new(std::sync::RwLock::new(MouseControllerState::with_pattern(
@@ -35,6 +52,17 @@ impl MouseController {
     }
 
     /// Updates the pattern used by the mouse controller
+    ///
+    /// This method allows changing the mouse movement pattern at runtime.
+    /// The new pattern will be used for all later mouse movements.
+    ///
+    /// # Arguments
+    /// * `pattern` - A vector of Step objects that define the mouse movement pattern.
+    ///   Each step specifies horizontal and vertical movement amounts and a duration.
+    ///
+    /// # Thread Safety
+    /// This method acquires a write lock on the shared state, ensuring that
+    /// the pattern is not being read by the background thread while it's being updated.
     pub fn update_pattern(&mut self, pattern: crate::mouse_controller::step::Pattern) {
         if let Ok(mut state) = self.state.write() {
             state.pattern = pattern;
@@ -47,10 +75,30 @@ impl MouseController {
         }
     }
 
-    // Private method to start the controller thread
+    /// Starts a background thread that continuously monitors the state and applies
+    /// mouse movements according to the configured pattern when conditions are met.
+    ///
+    /// This method is called automatically when a new MouseController is created.
+    /// The thread runs indefinitely until the program terminates.
+    ///
+    /// # Implementation Details
+    /// The thread performs the following operations in a loop:
+    /// 1. Reads the current pattern and enabled state from the shared state
+    /// 2. Checks if the pattern is empty and skips the iteration if it is
+    /// 3. Determines if the controller should be running based on mouse button states
+    /// 4. Applies mouse movements according to the current step in the pattern
+    /// 5. Advances to the next step when the current step's duration has elapsed
+    ///
+    /// # Performance Considerations
+    /// - The thread minimizes lock duration by only acquiring the read lock briefly
+    /// - It uses caching to avoid repeated pattern access and cloning
+    /// - State changes are logged only when they occur to reduce logging overhead
+    ///
+    /// # Arguments
+    /// * `state` - Shared state that can be accessed by both the controller and the thread
     fn start_controller_thread(
         state: Arc<std::sync::RwLock<MouseControllerState>>,
-    ) -> thread::JoinHandle<()> {
+    ) {
         info!("Starting mouse controller thread");
 
         thread::spawn(move || {
@@ -150,6 +198,6 @@ impl MouseController {
 
                 thread::sleep(Duration::from_millis(DEFAULT_THREAD_SLEEP_DURATION_MS));
             }
-        })
+        });
     }
 }
