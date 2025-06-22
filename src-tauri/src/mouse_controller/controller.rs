@@ -5,8 +5,8 @@ use std::time::{Duration, Instant};
 use log::{debug, error, info};
 
 use crate::mouse_controller::state::MouseControllerState;
-use crate::mouse_controller::step::Step;
 use crate::mouse_controller::utils::{send_mouse_input, should_run};
+use crate::patterns::{Step, Steps};
 use crate::DEFAULT_THREAD_SLEEP_DURATION_MS;
 
 /// Controller for programmatic mouse movements
@@ -46,9 +46,7 @@ impl MouseController {
         Self::start_controller_thread(Arc::clone(&state));
 
         // Return a new MouseController with the state and thread
-        Self {
-            state,
-        }
+        Self { state }
     }
 
     /// Updates the pattern used by the mouse controller
@@ -63,12 +61,12 @@ impl MouseController {
     /// # Thread Safety
     /// This method acquires a write lock on the shared state, ensuring that
     /// the pattern is not being read by the background thread while it's being updated.
-    pub fn update_pattern(&mut self, pattern: crate::mouse_controller::step::Pattern) {
+    pub fn update_steps(&mut self, steps: Steps) {
         if let Ok(mut state) = self.state.write() {
-            state.pattern = pattern;
+            state.steps = steps;
             info!(
                 "Updated mouse controller pattern with {} steps",
-                state.pattern.len()
+                state.steps.len()
             );
         } else {
             error!("Failed to acquire write lock on mouse controller state");
@@ -96,9 +94,7 @@ impl MouseController {
     ///
     /// # Arguments
     /// * `state` - Shared state that can be accessed by both the controller and the thread
-    fn start_controller_thread(
-        state: Arc<std::sync::RwLock<MouseControllerState>>,
-    ) {
+    fn start_controller_thread(state: Arc<std::sync::RwLock<MouseControllerState>>) {
         info!("Starting mouse controller thread");
 
         thread::spawn(move || {
@@ -115,16 +111,16 @@ impl MouseController {
                 let (pattern, enabled, pattern_is_empty) = {
                     match state.read() {
                         Ok(guard) => {
-                            let is_empty = guard.pattern.is_empty();
+                            let is_empty = guard.steps.is_empty();
 
                             // If pattern is empty, don't clone anything
                             if is_empty {
                                 (vec![], guard.enabled, true)
                             } else {
                                 // Only clone the pattern, not the entire state
-                                (guard.pattern.clone(), guard.enabled, false)
+                                (guard.steps.clone(), guard.enabled, false)
                             }
-                        },
+                        }
                         Err(e) => {
                             error!("Failed to acquire read lock on state: {}", e);
                             thread::sleep(Duration::from_millis(DEFAULT_THREAD_SLEEP_DURATION_MS));

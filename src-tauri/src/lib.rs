@@ -1,27 +1,13 @@
-use crate::mouse_controller::{MouseController, Pattern, Step};
+use crate::mouse_controller::MouseController;
 
+use crate::patterns::PatternCollection;
 use tauri::Manager;
 
 mod mouse_controller;
+mod patterns;
 
 /// Default sleep duration between pattern processing iterations
 pub const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
-
-/// Default recoil compensation pattern
-fn default_pattern() -> Pattern {
-    vec![
-        Step {
-            dx: 0,
-            dy: 50,
-            duration: 100,
-        },
-        Step {
-            dx: -2,
-            dy: 45,
-            duration: 0,
-        },
-    ]
-}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -35,11 +21,13 @@ pub fn run() {
                 )?;
             }
 
+            let pattern_collection = PatternCollection::new();
+
             // Create a mouse controller
             let mut mouse_controller = MouseController::create();
 
             // Set the pattern for the controller (this will automatically start the controller)
-            mouse_controller.update_pattern(default_pattern());
+            mouse_controller.update_steps(pattern_collection.get_pattern("r4c").config);
 
             // Store the controller handle in the app state for later use
             // This allows other parts of the application to update the pattern at runtime

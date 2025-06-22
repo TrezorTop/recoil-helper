@@ -1,0 +1,18 @@
+{
+  "patterns": {
+    "r4c": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 50
+        },
+        {
+          "duration": 0,
+          "dx": -2,
+          "dy": 45
+        }
+      ]
+    }
+  }
+}

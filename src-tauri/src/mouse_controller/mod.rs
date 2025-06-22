@@ -19,7 +19,6 @@
 mod controller;
 mod error;
 mod state;
-mod step;
 mod utils;
 
 /// Public exports from the mouse_controller module
@@ -29,4 +28,4 @@ mod utils;
 /// - `Pattern`: A sequence of mouse movement steps
 /// - `Step`: A single mouse movement step with direction and duration
 pub use controller::MouseController;
-pub use step::{Pattern, Step};
+
