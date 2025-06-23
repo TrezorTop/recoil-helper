@@ -65,11 +65,28 @@ impl MouseController {
     /// the pattern is not being read by the background thread while it's being updated.
     pub fn update_steps(&mut self, steps: Steps) {
         if let Ok(mut state) = self.state.write() {
-            state.steps = steps;
+            state.steps = Some(steps);
             info!(
                 "Updated mouse controller pattern with {} steps",
-                state.steps.len()
+                state.steps.as_ref().map_or(0, |s| s.len())
             );
+        } else {
+            error!("Failed to acquire write lock on mouse controller state");
+        }
+    }
+
+    /// Sets the pattern to None (null)
+    ///
+    /// This method is used when no pattern is detected and we want to disable
+    /// the mouse controller by setting the pattern to None.
+    ///
+    /// # Thread Safety
+    /// This method acquires a write lock on the shared state, ensuring that
+    /// the pattern is not being read by the background thread while it's being updated.
+    pub fn clear_steps(&mut self) {
+        if let Ok(mut state) = self.state.write() {
+            state.steps = None;
+            info!("Cleared mouse controller pattern (set to None)");
         } else {
             error!("Failed to acquire write lock on mouse controller state");
         }
@@ -113,14 +130,15 @@ impl MouseController {
                 let (pattern, enabled, pattern_is_empty) = {
                     match state.read() {
                         Ok(guard) => {
-                            let is_empty = guard.steps.is_empty();
+                            // Check if steps is None or empty
+                            let is_empty = guard.steps.as_ref().map_or(true, |s| s.is_empty());
 
-                            // If pattern is empty, don't clone anything
+                            // If pattern is None or empty, don't clone anything
                             if is_empty {
                                 (vec![], guard.enabled, true)
                             } else {
                                 // Only clone the pattern, not the entire state
-                                (guard.steps.clone(), guard.enabled, false)
+                                (guard.steps.as_ref().unwrap().clone(), guard.enabled, false)
                             }
                         }
                         Err(e) => {

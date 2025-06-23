@@ -10,12 +10,10 @@
         {
           "duration": 0,
           "dx": -2,
-          "dy": 45
+          "dy": 46
         }
       ],
-      "images": [
-        "r4c.png"
-      ]
+      "images": ["r4c.png"]
     },
     "m4": {
       "config": [
@@ -32,12 +30,40 @@
         {
           "duration": 100,
           "dx": -1,
-          "dy": 40
+          "dy": 38
         }
       ],
-      "images": [
-        "m4.png"
-      ]
+      "images": ["m4.png"]
+    },
+    "mk14": {
+      "config": [
+        {
+          "duration": 0,
+          "dx": -2,
+          "dy": 32
+        }
+      ],
+      "images": ["mk14.png"]
+    },
+    "smg12": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 30
+        },
+        {
+          "duration": 120,
+          "dx": 0,
+          "dy": 26
+        },
+        {
+          "duration": 0,
+          "dx": 5,
+          "dy": 26
+        }
+      ],
+      "images": ["smg12.png"]
     }
   }
 }
