@@ -1,13 +1,11 @@
 use crate::mouse_controller::MouseController;
 
 use crate::patterns::PatternCollection;
-use tauri::Manager;
+use crate::screen_reader::ScreenReader;
 
 mod mouse_controller;
 mod patterns;
-
-/// Default sleep duration between pattern processing iterations
-pub const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
+mod screen_reader;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -22,16 +20,22 @@ pub fn run() {
             }
 
             let pattern_collection = PatternCollection::new();
+            let screen_reader = ScreenReader::new();
 
             // Create a mouse controller
-            let mut mouse_controller = MouseController::create();
+            let mut mouse_controller = MouseController::new();
 
-            // Set the pattern for the controller (this will automatically start the controller)
-            mouse_controller.update_steps(pattern_collection.get_pattern("r4c").config);
+            // Detect which pattern is on the screen
+            if let Some(pattern_name) =
+                screen_reader.detect_pattern(pattern_collection.get_patterns())
+            {
+                println!("Detected pattern: {}", pattern_name);
 
-            // Store the controller handle in the app state for later use
-            // This allows other parts of the application to update the pattern at runtime
-            app.manage(mouse_controller);
+                // Set the pattern for the controller
+                mouse_controller.update_steps(pattern_collection.get_pattern(&pattern_name).config);
+            } else {
+                println!("No pattern detected");
+            }
 
             Ok(())
         })

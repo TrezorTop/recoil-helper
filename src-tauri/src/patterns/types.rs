@@ -15,6 +15,8 @@ pub struct Step {
 pub struct Pattern {
     /// A sequence of mouse movement steps that form a pattern
     pub config: Steps,
+    /// Images associated with this pattern
+    pub images: Vec<String>,
 }
 
 pub type Steps = Vec<Step>;

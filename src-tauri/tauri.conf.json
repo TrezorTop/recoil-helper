@@ -28,6 +28,7 @@
     "targets": "all",
     "resources": [
       "config/config.json",
+      "config/images/*",
       "opencv_world4110.dll"
     ],
     "icon": [

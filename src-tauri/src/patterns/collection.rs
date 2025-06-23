@@ -27,6 +27,11 @@ impl PatternCollection {
         self.patterns.get(name).expect("Pattern not found").clone()
     }
 
+    /// Gets a reference to the patterns map
+    pub fn get_patterns(&self) -> &HashMap<String, Pattern> {
+        &self.patterns
+    }
+
     /// Loads patterns from a JSON file
     fn load_from_file() -> Result<Self, String> {
         match fs::read_to_string("config/config.json") {

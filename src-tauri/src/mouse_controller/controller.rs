@@ -7,7 +7,9 @@ use log::{debug, error, info};
 use crate::mouse_controller::state::MouseControllerState;
 use crate::mouse_controller::utils::{send_mouse_input, should_run};
 use crate::patterns::{Step, Steps};
-use crate::DEFAULT_THREAD_SLEEP_DURATION_MS;
+
+/// Default sleep duration between pattern processing iterations
+const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
 
 /// Controller for programmatic mouse movements
 ///
@@ -36,7 +38,7 @@ impl MouseController {
     ///
     /// # Returns
     /// A MouseController instance that can be used to update the movement pattern
-    pub fn create() -> Self {
+    pub fn new() -> Self {
         // Create a shared state with an empty pattern
         let state = Arc::new(std::sync::RwLock::new(MouseControllerState::with_pattern(
             vec![],
