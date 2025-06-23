@@ -1,0 +1,43 @@
+{
+  "patterns": {
+    "r4c": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 50
+        },
+        {
+          "duration": 0,
+          "dx": -2,
+          "dy": 45
+        }
+      ],
+      "images": [
+        "r4c.png"
+      ]
+    },
+    "m4": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "duration": 800,
+          "dx": -1,
+          "dy": 35
+        },
+        {
+          "duration": 100,
+          "dx": -1,
+          "dy": 40
+        }
+      ],
+      "images": [
+        "m4.png"
+      ]
+    }
+  }
+}
