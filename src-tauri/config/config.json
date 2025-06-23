@@ -16,6 +16,28 @@
       "images": [
         "r4c.png"
       ]
+    },
+    "m4": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 35
+        },
+        {
+          "duration": 800,
+          "dx": -1,
+          "dy": 35
+        },
+        {
+          "duration": 100,
+          "dx": -1,
+          "dy": 40
+        }
+      ],
+      "images": [
+        "m4.png"
+      ]
     }
   }
 }
