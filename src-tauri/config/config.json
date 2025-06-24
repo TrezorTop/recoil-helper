@@ -3,9 +3,9 @@
     "r4c": {
       "config": [
         {
-          "duration": 100,
+          "duration": 30,
           "dx": 0,
-          "dy": 50
+          "dy": 47
         },
         {
           "duration": 0,

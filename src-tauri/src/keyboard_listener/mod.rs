@@ -31,6 +31,10 @@ pub mod keys {
         code: 0x32,
         name: "2",
     };
+    pub const KEY_F1: Key = Key {
+        code: 0x70,
+        name: "F1",
+    };
 }
 
 /// Keyboard listener that monitors key presses and executes callbacks

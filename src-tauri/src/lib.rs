@@ -2,6 +2,7 @@ use crate::keyboard_listener::{keys, KeyboardListener};
 use crate::mouse_controller::MouseController;
 use crate::patterns::PatternCollection;
 use std::sync::{Arc, Mutex};
+use log::{info, error};
 
 mod keyboard_listener;
 mod mouse_controller;
@@ -30,6 +31,7 @@ pub fn run() {
             // Register callbacks for keys
             register_key_callback(&mut keyboard_listener, keys::KEY_1, &pattern_collection, &mouse_controller);
             register_key_callback(&mut keyboard_listener, keys::KEY_2, &pattern_collection, &mouse_controller);
+            register_reload_callback(&mut keyboard_listener, keys::KEY_F1, &pattern_collection, &mouse_controller);
 
             // Start the keyboard listener
             keyboard_listener.start();
@@ -76,4 +78,37 @@ fn detect_and_set_pattern(
 
         None
     }
+}
+
+/// Registers a callback for the F1 key that will reload the JSON config
+fn register_reload_callback(
+    keyboard_listener: &mut KeyboardListener,
+    key: keyboard_listener::Key,
+    pattern_collection: &Arc<PatternCollection>,
+    mouse_controller: &Arc<Mutex<MouseController>>,
+) {
+    let pattern_collection_clone = Arc::clone(pattern_collection);
+    let mouse_controller_clone = Arc::clone(mouse_controller);
+
+    keyboard_listener.on_key_press(key, move || {
+        info!("Reloading JSON config...");
+
+        // Create a mutable reference to the pattern collection
+        let pattern_collection_mut = unsafe { &mut *(Arc::as_ptr(&pattern_collection_clone) as *mut PatternCollection) };
+
+        // Reload the JSON config
+        match pattern_collection_mut.reload() {
+            Ok(()) => {
+                info!("JSON config reloaded successfully");
+
+                // Update the active pattern
+                if let Ok(mut controller) = mouse_controller_clone.lock() {
+                    detect_and_set_pattern(&pattern_collection_clone, &mut controller);
+                }
+            },
+            Err(e) => {
+                error!("Failed to reload JSON config: {}", e);
+            }
+        }
+    });
 }

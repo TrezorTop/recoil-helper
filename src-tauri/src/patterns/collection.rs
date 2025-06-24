@@ -100,4 +100,15 @@ impl PatternCollection {
             Err(e) => Err(format!("Failed to read file: {}", e)),
         }
     }
+
+    /// Reloads patterns from the JSON file
+    pub fn reload(&mut self) -> Result<(), String> {
+        match Self::load_from_file() {
+            Ok(collection) => {
+                self.patterns = collection.patterns;
+                Ok(())
+            },
+            Err(e) => Err(e),
+        }
+    }
 }
