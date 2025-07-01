@@ -1,25 +1,27 @@
-use crate::patterns::types::Pattern;
+use crate::patterns::types::{Pattern, Sensitivity};
 use screenshots::Screen;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
 
-/// Collection of named patterns that can be loaded from and saved to JSON
+/// Collection of named patterns and sensitivity settings that can be loaded from and saved to JSON
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PatternCollection {
     /// Map of pattern names to patterns
-    patterns: HashMap<String, Pattern>,
+    pub patterns: HashMap<String, Pattern>,
+    /// Sensitivity settings for mouse movements
+    pub sensitivity: Sensitivity,
 }
 
 impl PatternCollection {
     /// Creates a new empty pattern collection
     pub fn new() -> Self {
-        let patterns = Self::load_from_file();
+        let config = Self::load_from_file()
+            .expect("Failed to load patterns from file");
 
         Self {
-            patterns: patterns
-                .expect("Failed to load patterns from file")
-                .patterns,
+            patterns: config.patterns,
+            sensitivity: config.sensitivity,
         }
     }
 

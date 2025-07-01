@@ -101,8 +101,12 @@ fn register_reload_callback(
             Ok(()) => {
                 info!("JSON config reloaded successfully");
 
-                // Update the active pattern
+                // Update the sensitivity settings
                 if let Ok(mut controller) = mouse_controller_clone.lock() {
+                    // Update sensitivity from the reloaded config
+                    controller.update_sensitivity(pattern_collection_clone.sensitivity.clone());
+
+                    // Update the active pattern
                     detect_and_set_pattern(&pattern_collection_clone, &mut controller);
                 }
             },

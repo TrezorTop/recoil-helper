@@ -6,7 +6,7 @@ use log::{debug, error, info};
 
 use crate::mouse_controller::state::MouseControllerState;
 use crate::mouse_controller::utils::{send_mouse_input, should_run};
-use crate::patterns::{Step, Steps};
+use crate::patterns::{PatternCollection, Sensitivity, Step, Steps};
 
 /// Default sleep duration between pattern processing iterations
 const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
@@ -39,10 +39,14 @@ impl MouseController {
     /// # Returns
     /// A MouseController instance that can be used to update the movement pattern
     pub fn new() -> Self {
-        // Create a shared state with an empty pattern
-        let state = Arc::new(std::sync::RwLock::new(MouseControllerState::with_pattern(
-            vec![],
-        )));
+        // Load sensitivity settings from configuration
+        let pattern_collection = PatternCollection::new();
+        let sensitivity = pattern_collection.sensitivity.clone();
+
+        // Create a shared state with an empty pattern and sensitivity settings
+        let state = Arc::new(std::sync::RwLock::new(
+            MouseControllerState::with_pattern_and_sensitivity(vec![], sensitivity)
+        ));
 
         // Start the controller thread
         Self::start_controller_thread(Arc::clone(&state));
@@ -63,11 +67,28 @@ impl MouseController {
     /// # Thread Safety
     /// This method acquires a write lock on the shared state, ensuring that
     /// the pattern is not being read by the background thread while it's being updated.
-    pub fn update_steps(&mut self, steps: Steps) {
+    pub fn update_steps(&mut self, mut steps: Steps) {
         if let Ok(mut state) = self.state.write() {
+            // Pre-calculate adjusted dx and dy values based on sensitivity
+            for step in &mut steps {
+                // Apply sensitivity to dx and dy values
+                // Higher sensitivity values make the movement smaller (divided by sensitivity)
+                step.adjusted_dx = if state.sensitivity.x > 1.0 {
+                    (step.dx as f32 / state.sensitivity.x) as i32
+                } else {
+                    step.dx
+                };
+
+                step.adjusted_dy = if state.sensitivity.y > 1.0 {
+                    (step.dy as f32 / state.sensitivity.y) as i32
+                } else {
+                    step.dy
+                };
+            }
+
             state.steps = Some(steps);
             info!(
-                "Updated mouse controller pattern with {} steps",
+                "Updated mouse controller pattern with {} steps (pre-calculated adjusted values)",
                 state.steps.as_ref().map_or(0, |s| s.len())
             );
         } else {
@@ -87,6 +108,52 @@ impl MouseController {
         if let Ok(mut state) = self.state.write() {
             state.steps = None;
             info!("Cleared mouse controller pattern (set to None)");
+        } else {
+            error!("Failed to acquire write lock on mouse controller state");
+        }
+    }
+
+    /// Updates the sensitivity settings for mouse movements
+    ///
+    /// # Arguments
+    /// * `sensitivity` - A Sensitivity object that defines the horizontal and vertical sensitivity.
+    ///   Higher values result in smaller mouse movements.
+    ///
+    /// # Thread Safety
+    /// This method acquires a write lock on the shared state, ensuring that
+    /// the sensitivity is not being read by the background thread while it's being updated.
+    pub fn update_sensitivity(&mut self, sensitivity: Sensitivity) {
+        if let Ok(mut state) = self.state.write() {
+            // Store the new sensitivity values
+            let sensitivity_x = sensitivity.x;
+            let sensitivity_y = sensitivity.y;
+
+            // Update the sensitivity in the state
+            state.sensitivity = sensitivity;
+
+            // Recalculate adjusted values for all steps if steps exist
+            if let Some(steps) = &mut state.steps {
+                for step in steps {
+                    // Apply sensitivity to dx and dy values
+                    // Higher sensitivity values make the movement smaller (divided by sensitivity)
+                    step.adjusted_dx = if sensitivity_x > 1.0 {
+                        (step.dx as f32 / sensitivity_x) as i32
+                    } else {
+                        step.dx
+                    };
+
+                    step.adjusted_dy = if sensitivity_y > 1.0 {
+                        (step.dy as f32 / sensitivity_y) as i32
+                    } else {
+                        step.dy
+                    };
+                }
+            }
+
+            info!(
+                "Updated mouse controller sensitivity to x={}, y={} and recalculated adjusted values",
+                sensitivity_x, sensitivity_y
+            );
         } else {
             error!("Failed to acquire write lock on mouse controller state");
         }
@@ -138,7 +205,11 @@ impl MouseController {
                                 (vec![], guard.enabled, true)
                             } else {
                                 // Only clone the pattern, not the entire state
-                                (guard.steps.as_ref().unwrap().clone(), guard.enabled, false)
+                                (
+                                    guard.steps.as_ref().unwrap().clone(), 
+                                    guard.enabled, 
+                                    false
+                                )
                             }
                         }
                         Err(e) => {
@@ -193,8 +264,9 @@ impl MouseController {
 
                     // Get the current step (safe because we've checked bounds and emptiness)
                     if let Some(step) = &current_step {
-                        // Send mouse input based on the current step
-                        if let Err(e) = send_mouse_input(step.dx, step.dy) {
+                        // Use pre-calculated adjusted values
+                        // Send mouse input based on the adjusted values
+                        if let Err(e) = send_mouse_input(step.adjusted_dx, step.adjusted_dy) {
                             error!("Failed to send mouse input: {}", e);
                         }
 

@@ -1,4 +1,8 @@
 {
+  "sensitivity": {
+    "x": 5.0,
+    "y": 5.0
+  },
   "patterns": {
     "r4c": {
       "config": [
@@ -13,27 +17,31 @@
           "dy": 46
         }
       ],
-      "images": ["r4c.png"]
+      "images": [
+        "r4c.png"
+      ]
     },
     "m4": {
       "config": [
         {
-          "duration": 100,
+          "duration": 300,
           "dx": 0,
-          "dy": 35
+          "dy": 180
         },
         {
-          "duration": 800,
-          "dx": -1,
-          "dy": 35
+          "duration": 1050,
+          "dx": -10,
+          "dy": 180
         },
         {
-          "duration": 100,
-          "dx": -1,
-          "dy": 38
+          "duration": 0,
+          "dx": -10,
+          "dy": 200
         }
       ],
-      "images": ["m4.png"]
+      "images": [
+        "m4.png"
+      ]
     },
     "mk14": {
       "config": [
@@ -43,7 +51,9 @@
           "dy": 32
         }
       ],
-      "images": ["mk14.png"]
+      "images": [
+        "mk14.png"
+      ]
     },
     "smg12": {
       "config": [
@@ -63,7 +73,9 @@
           "dy": 26
         }
       ],
-      "images": ["smg12.png"]
+      "images": [
+        "smg12.png"
+      ]
     }
   }
 }
