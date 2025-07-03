@@ -4,111 +4,57 @@
     "y": 1.0
   },
   "patterns": {
-    "r4c": {
+    "416ccarbine": {
       "config": [
         {
-          "duration": 30,
-          "dx": -13,
-          "dy": 230
-        }
-      ],
-      "images": [
-        "r4c.png"
-      ]
-    },
-    "m4": {
-      "config": [
-        {
-          "duration": 300,
+          "duration": 1000,
           "dx": 0,
-          "dy": 180
-        },
-        {
-          "duration": 1050,
-          "dx": -10,
-          "dy": 180
-        },
-        {
-          "duration": 0,
-          "dx": -10,
-          "dy": 200
+          "dy": 100
         }
       ],
       "images": [
-        "m4.png"
+        "416ccarbine.png"
       ]
     },
-    "mk14": {
+    "417": {
       "config": [
         {
-          "duration": 0,
-          "dx": -13,
+          "duration": 1000,
+          "dx": 0,
           "dy": 150
         }
       ],
       "images": [
-        "mk14.png"
+        "417.png"
       ]
     },
-    "smg12": {
-      "config": [
-        {
-          "duration": 100,
-          "dx": 0,
-          "dy": 150
-        },
-        {
-          "duration": 120,
-          "dx": 20,
-          "dy": 130
-        },
-        {
-          "duration": 200,
-          "dx": 50,
-          "dy": 130
-        },
-        {
-          "duration": 0,
-          "dx": 0,
-          "dy": 130
-        }
-      ],
-      "images": [
-        "smg12.png"
-      ]
-    },
-    "l85a2": {
+    "44vendetta": {
       "config": [
         {
           "duration": 1000,
-          "dx": 15,
-          "dy": 129
-        },
-        {
-          "duration": 0,
-          "dx": 28,
-          "dy": 140
+          "dx": 0,
+          "dy": 110
         }
       ],
       "images": [
-        "l85a2.png"
+        "44vendetta.png"
       ]
     },
-    "ar33": {
+    "552commando": {
       "config": [
         {
           "duration": 1000,
-          "dx": -5,
+          "dx": -7,
           "dy": 145
         },
         {
           "duration": 1000,
-          "dx": -5,
+          "dx": -7,
           "dy": 160
         }
       ],
       "images": [
-        "ar33.png"
+        "552commando.png"
       ]
     },
     "556xi": {
@@ -128,21 +74,55 @@
         "556xi.png"
       ]
     },
-    "f2": {
+    "9mmc1": {
       "config": [
         {
-          "duration": 300,
+          "duration": 1000,
           "dx": 0,
-          "dy": 320
-        },
-        {
-          "duration": 500,
-          "dx": -10,
-          "dy": 320
+          "dy": 100
         }
       ],
       "images": [
-        "f2.png"
+        "9mmc1.png"
+      ]
+    },
+    "9x19vsn_azami": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "azami.png"
+      ]
+    },
+    "9x19vsn_kapkan": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "kapkan.png"
+      ]
+    },
+    "9x19vsn_tachanka": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "tachanka.png"
       ]
     },
     "ak12": {
@@ -160,6 +140,76 @@
       ],
       "images": [
         "ak12.png"
+      ]
+    },
+    "ak74m": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -8,
+          "dy": 110
+        },
+        {
+          "duration": 1000,
+          "dx": -8,
+          "dy": 120
+        }
+      ],
+      "images": [
+        "ak74m.png"
+      ]
+    },
+    "alda556": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "alda556.png"
+      ]
+    },
+    "ar1550": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "ar1550.png"
+      ]
+    },
+    "ar33": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 145
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 160
+        }
+      ],
+      "images": [
+        "ar33.png"
+      ]
+    },
+    "arx200": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -8,
+          "dy": 145
+        }
+      ],
+      "images": [
+        "arx200.png"
       ]
     },
     "auga2_iq": {
@@ -185,55 +235,17 @@
         "iq.png"
       ]
     },
-    "c8sfw": {
+    "auga2_wamai": {
       "config": [
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 200
-        },
-        {
-          "duration": 1000,
-          "dx": -17,
-          "dy": 210
+          "dy": 100
         }
       ],
       "images": [
-        "c8sfw.png"
-      ]
-    },
-    "para308": {
-      "config": [
-        {
-          "duration": 700,
-          "dx": 0,
-          "dy": 130
-        },
-        {
-          "duration": 1000,
-          "dx": -15,
-          "dy": 150
-        },
-        {
-          "duration": 1000,
-          "dx": -5,
-          "dy": 160
-        }
-      ],
-      "images": [
-        "para308.png"
-      ]
-    },
-    "type89": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": -16,
-          "dy": 180
-        }
-      ],
-      "images": [
-        "type89.png"
+        "auga2.png",
+        "wamai.png"
       ]
     },
     "bearing9": {
@@ -265,105 +277,55 @@
         "c7e.png"
       ]
     },
-    "t95lsw": {
+    "c8sfw": {
       "config": [
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 150
-        },
-        {
-          "duration": 1200,
-          "dx": 0,
-          "dy": 160
+          "dy": 200
         },
         {
           "duration": 1000,
-          "dx": 15,
-          "dy": 180
-        }
-      ],
-      "images": [
-        "t95lsw.png"
-      ]
-    },
-    "m762": {
-      "config": [
-        {
-          "duration": 1700,
-          "dx": 8,
-          "dy": 185
-        },
-        {
-          "duration": 1000,
-          "dx": 13,
+          "dx": -17,
           "dy": 210
-        },
-        {
-          "duration": 1000,
-          "dx": 13,
-          "dy": 260
         }
       ],
       "images": [
-        "m762.png"
+        "c8sfw.png"
       ]
     },
-    "v308": {
-      "config": [
-        {
-          "duration": 2000,
-          "dx": 0,
-          "dy": 140
-        },
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 150
-        },
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 170
-        }
-      ],
-      "images": [
-        "v308.png"
-      ]
-    },
-    "spear308_finka": {
+    "commando9": {
       "config": [
         {
           "duration": 1000,
-          "dx": -7,
-          "dy": 205
+          "dx": -4,
+          "dy": 67
         },
         {
           "duration": 1000,
-          "dx": -7,
-          "dy": 224
-        },
-        {
-          "duration": 1000,
-          "dx": -7,
-          "dy": 234
+          "dx": -5,
+          "dy": 67
         }
       ],
       "images": [
-        "spear308.png",
-        "finka.png"
+        "commando9.png"
       ]
     },
-    "arx200": {
+    "f2": {
       "config": [
         {
-          "duration": 1000,
-          "dx": -8,
-          "dy": 145
+          "duration": 300,
+          "dx": 0,
+          "dy": 320
+        },
+        {
+          "duration": 500,
+          "dx": -10,
+          "dy": 320
         }
       ],
       "images": [
-        "arx200.png"
+        "f2.png"
       ]
     },
     "f90": {
@@ -418,33 +380,234 @@
         "g8a1.png"
       ]
     },
-    "spsmg9": {
+    "k1a": {
       "config": [
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 70
+          "dy": 100
         }
       ],
       "images": [
-        "spsmg9.png"
+        "k1a.png"
       ]
     },
-    "sc3000k": {
+    "l85a2": {
       "config": [
         {
-          "duration": 500,
-          "dx": -6,
+          "duration": 1000,
+          "dx": 15,
+          "dy": 129
+        },
+        {
+          "duration": 0,
+          "dx": 28,
+          "dy": 140
+        }
+      ],
+      "images": [
+        "l85a2.png"
+      ]
+    },
+    "m4": {
+      "config": [
+        {
+          "duration": 300,
+          "dx": 0,
+          "dy": 180
+        },
+        {
+          "duration": 1050,
+          "dx": -10,
+          "dy": 180
+        },
+        {
+          "duration": 0,
+          "dx": -10,
           "dy": 200
+        }
+      ],
+      "images": [
+        "m4.png"
+      ]
+    },
+    "m762": {
+      "config": [
+        {
+          "duration": 1700,
+          "dx": 8,
+          "dy": 185
         },
         {
           "duration": 1000,
-          "dx": -6,
-          "dy": 220
+          "dx": 13,
+          "dy": 210
+        },
+        {
+          "duration": 1000,
+          "dx": 13,
+          "dy": 260
         }
       ],
       "images": [
-        "sc3000k.png"
+        "m762.png"
+      ]
+    },
+    "mk14": {
+      "config": [
+        {
+          "duration": 0,
+          "dx": -13,
+          "dy": 150
+        }
+      ],
+      "images": [
+        "mk14.png"
+      ]
+    },
+    "mp5_doc": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "doc.png"
+      ]
+    },
+    "mp5_melusi": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "melusi.png"
+      ]
+    },
+    "mp5_rook": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "rook.png"
+      ]
+    },
+    "mp5sd": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mp5sd.png"
+      ]
+    },
+    "mp7": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mp7.png"
+      ]
+    },
+    "mpx": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mpx.png"
+      ]
+    },
+    "mx4storm": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "mx4storm.png"
+      ]
+    },
+    "p10roni": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "p10roni.png"
+      ]
+    },
+    "p90": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "p90.png"
+      ]
+    },
+    "para308": {
+      "config": [
+        {
+          "duration": 700,
+          "dx": 0,
+          "dy": 130
+        },
+        {
+          "duration": 1000,
+          "dx": -15,
+          "dy": 150
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 160
+        }
+      ],
+      "images": [
+        "para308.png"
+      ]
+    },
+    "pcx33": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "pcx33.png"
       ]
     },
     "pdw9": {
@@ -491,62 +654,16 @@
         "pof9.png"
       ]
     },
-    "552commando": {
+    "r4c": {
       "config": [
         {
-          "duration": 1000,
-          "dx": -7,
-          "dy": 145
-        },
-        {
-          "duration": 1000,
-          "dx": -7,
-          "dy": 160
+          "duration": 30,
+          "dx": -13,
+          "dy": 230
         }
       ],
       "images": [
-        "552commando.png"
-      ]
-    },
-    "ak74m": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": -8,
-          "dy": 110
-        },
-        {
-          "duration": 1000,
-          "dx": -8,
-          "dy": 120
-        }
-      ],
-      "images": [
-        "ak74m.png"
-      ]
-    },
-    "44vendetta": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 110
-        }
-      ],
-      "images": [
-        "44vendetta.png"
-      ]
-    },
-    "417": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 150
-        }
-      ],
-      "images": [
-        "417.png"
+        "r4c.png"
       ]
     },
     "reapermk2": {
@@ -566,21 +683,33 @@
         "reapermk2.png"
       ]
     },
-    "commando9": {
+    "sc3000k": {
       "config": [
         {
-          "duration": 1000,
-          "dx": -4,
-          "dy": 67
+          "duration": 500,
+          "dx": -6,
+          "dy": 200
         },
         {
           "duration": 1000,
-          "dx": -5,
-          "dy": 67
+          "dx": -6,
+          "dy": 220
         }
       ],
       "images": [
-        "commando9.png"
+        "sc3000k.png"
+      ]
+    },
+    "scorpionevo3a1": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "scorpionevo3a1.png"
       ]
     },
     "smg11": {
@@ -610,7 +739,140 @@
         "smg11.png"
       ]
     },
-    "ump45castle": {
+    "smg12": {
+      "config": [
+        {
+          "duration": 100,
+          "dx": 0,
+          "dy": 150
+        },
+        {
+          "duration": 120,
+          "dx": 20,
+          "dy": 130
+        },
+        {
+          "duration": 200,
+          "dx": 50,
+          "dy": 130
+        },
+        {
+          "duration": 0,
+          "dx": 0,
+          "dy": 130
+        }
+      ],
+      "images": [
+        "smg12.png"
+      ]
+    },
+    "spear308_finka": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 205
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 224
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 234
+        }
+      ],
+      "images": [
+        "spear308.png",
+        "finka.png"
+      ]
+    },
+    "spear308_thunderbird": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "spear308.png",
+        "thunderbird.png"
+      ]
+    },
+    "spsmg9": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 70
+        }
+      ],
+      "images": [
+        "spsmg9.png"
+      ]
+    },
+    "t5smg": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "t5smg.png"
+      ]
+    },
+    "t95lsw": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 150
+        },
+        {
+          "duration": 1200,
+          "dx": 0,
+          "dy": 160
+        },
+        {
+          "duration": 1000,
+          "dx": 15,
+          "dy": 180
+        }
+      ],
+      "images": [
+        "t95lsw.png"
+      ]
+    },
+    "tcsg12": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "tcsg12.png"
+      ]
+    },
+    "type89": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -16,
+          "dy": 180
+        }
+      ],
+      "images": [
+        "type89.png"
+      ]
+    },
+    "ump45_castle": {
       "config": [
         {
           "duration": 700,
@@ -627,7 +889,7 @@
         "ump45.png"
       ]
     },
-    "ump45pulse": {
+    "ump45_pulse": {
       "config": [
         {
           "duration": 700,
@@ -645,266 +907,6 @@
         "pulse.png"
       ]
     },
-    "mp5_doc": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mp5.png",
-        "doc.png"
-      ]
-    },
-    "mp5_rook": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mp5.png",
-        "rook.png"
-      ]
-    },
-    "9x19vsn_kapkan": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "9x19vsn.png",
-        "kapkan.png"
-      ]
-    },
-    "9x19vsn_tachanka": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "9x19vsn.png",
-        "tachanka.png"
-      ]
-    },
-    "9x19vsn_azami": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "9x19vsn.png",
-        "azami.png"
-      ]
-    },
-    "416ccarbine": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "416ccarbine.png"
-      ]
-    },
-    "mp7": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mp7.png"
-      ]
-    },
-    "9mmc1": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "9mmc1.png"
-      ]
-    },
-    "mpx": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mpx.png"
-      ]
-    },
-    "mp5sd": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mp5sd.png"
-      ]
-    },
-    "vector45acp": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "vector45acp.png"
-      ]
-    },
-    "t5smg": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "t5smg.png"
-      ]
-    },
-    "scorpionevo3a1": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "scorpionevo3a1.png"
-      ]
-    },
-    "k1a": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "k1a.png"
-      ]
-    },
-    "alda556": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "alda556.png"
-      ]
-    },
-    "mx4storm": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mx4storm.png"
-      ]
-    },
-    "tcsg12": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "tcsg12.png"
-      ]
-    },
-    "p10roni": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "p10roni.png"
-      ]
-    },
-    "auga2_wamai": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "auga2.png",
-        "wamai.png"
-      ]
-    },
-    "mp5_melusi": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "mp5.png",
-        "melusi.png"
-      ]
-    },
-    "spear308_thunderbird": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "spear308.png",
-        "thunderbird.png"
-      ]
-    },
     "uzk50gi": {
       "config": [
         {
@@ -917,19 +919,29 @@
         "uzk50gi.png"
       ]
     },
-    "p90": {
+    "v308": {
       "config": [
+        {
+          "duration": 2000,
+          "dx": 0,
+          "dy": 140
+        },
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 100
+          "dy": 150
+        },
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 170
         }
       ],
       "images": [
-        "p90.png"
+        "v308.png"
       ]
     },
-    "ar1550": {
+    "vector45acp": {
       "config": [
         {
           "duration": 1000,
@@ -938,19 +950,7 @@
         }
       ],
       "images": [
-        "ar1550.png"
-      ]
-    },
-    "pcx33": {
-      "config": [
-        {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
-        }
-      ],
-      "images": [
-        "pcx33.png"
+        "vector45acp.png"
       ]
     }
   }
