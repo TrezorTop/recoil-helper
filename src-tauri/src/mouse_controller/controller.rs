@@ -73,26 +73,34 @@ impl MouseController {
             for step in &mut steps {
                 // Apply sensitivity to dx and dy values
                 // Higher sensitivity values make the movement smaller (divided by sensitivity)
-                step.adjusted_dx = if state.sensitivity.x > 1.0 {
+                step.adjusted_dx = if step.dx == 0 {
+                    0
+                } else if state.sensitivity.x > 1.0 {
                     let calculated = (step.dx as f32 / state.sensitivity.x) as i32;
-                    if calculated == 0 { 1 } else { calculated }
+                    if calculated == 0 {
+                        if step.dx > 0 { 1 } else { -1 }
+                    } else {
+                        calculated
+                    }
                 } else {
                     step.dx
                 };
 
-                step.adjusted_dy = if state.sensitivity.y > 1.0 {
+                step.adjusted_dy = if step.dy == 0 {
+                    0
+                } else if state.sensitivity.y > 1.0 {
                     let calculated = (step.dy as f32 / state.sensitivity.y) as i32;
-                    if calculated == 0 { 1 } else { calculated }
+                    if calculated == 0 {
+                        if step.dy > 0 { 1 } else { -1 }
+                    } else {
+                        calculated
+                    }
                 } else {
                     step.dy
                 };
             }
 
             state.steps = Some(steps);
-            info!(
-                "Updated mouse controller pattern with {} steps (pre-calculated adjusted values)",
-                state.steps.as_ref().map_or(0, |s| s.len())
-            );
         } else {
             error!("Failed to acquire write lock on mouse controller state");
         }
@@ -138,16 +146,28 @@ impl MouseController {
                 for step in steps {
                     // Apply sensitivity to dx and dy values
                     // Higher sensitivity values make the movement smaller (divided by sensitivity)
-                    step.adjusted_dx = if sensitivity_x > 1.0 {
+                    step.adjusted_dx = if step.dx == 0 {
+                        0
+                    } else if sensitivity_x > 1.0 {
                         let calculated = (step.dx as f32 / sensitivity_x) as i32;
-                        if calculated == 0 { 1 } else { calculated }
+                        if calculated == 0 {
+                            if step.dx > 0 { 1 } else { -1 }
+                        } else {
+                            calculated
+                        }
                     } else {
                         step.dx
                     };
 
-                    step.adjusted_dy = if sensitivity_y > 1.0 {
+                    step.adjusted_dy = if step.dy == 0 {
+                        0
+                    } else if sensitivity_y > 1.0 {
                         let calculated = (step.dy as f32 / sensitivity_y) as i32;
-                        if calculated == 0 { 1 } else { calculated }
+                        if calculated == 0 {
+                            if step.dy > 0 { 1 } else { -1 }
+                        } else {
+                            calculated
+                        }
                     } else {
                         step.dy
                     };
@@ -266,8 +286,6 @@ impl MouseController {
                     if let Some(step) = &current_step {
                         // Use pre-calculated adjusted values
                         // Send mouse input based on the adjusted values
-
-                        println!("{} {}", step.adjusted_dx, step.adjusted_dy);
 
                         if let Err(e) = send_mouse_input(step.adjusted_dx, step.adjusted_dy) {
                             error!("Failed to send mouse input: {}", e);

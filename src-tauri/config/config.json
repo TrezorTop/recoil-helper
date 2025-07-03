@@ -8,13 +8,13 @@
       "config": [
         {
           "duration": 1000,
-          "dx": -3,
-          "dy": 80
+          "dx": -5,
+          "dy": 122
         },
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 85
+          "dy": 125
         }
       ],
       "images": [
@@ -26,7 +26,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 125
+          "dy": 200
         }
       ],
       "images": [
@@ -38,7 +38,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 110
+          "dy": 140
         }
       ],
       "images": [
@@ -48,14 +48,14 @@
     "552commando": {
       "config": [
         {
-          "duration": 1000,
+          "duration": 700,
           "dx": -7,
-          "dy": 145
+          "dy": 210
         },
         {
           "duration": 1000,
           "dx": -7,
-          "dy": 160
+          "dy": 230
         }
       ],
       "images": [
@@ -65,14 +65,14 @@
     "556xi": {
       "config": [
         {
-          "duration": 700,
-          "dx": 19,
-          "dy": 124
+          "duration": 500,
+          "dx": 20,
+          "dy": 175
         },
         {
-          "duration": 1000,
-          "dx": 30,
-          "dy": 130
+          "duration": 700,
+          "dx": 35,
+          "dy": 195
         }
       ],
       "images": [
@@ -84,7 +84,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 100
+          "dy": 180
         }
       ],
       "images": [
@@ -94,9 +94,14 @@
     "9x19vsn_azami": {
       "config": [
         {
-          "duration": 1000,
-          "dx": 0,
+          "duration": 700,
+          "dx": -9,
           "dy": 100
+        },
+        {
+          "duration": 1000,
+          "dx": -9,
+          "dy": 115
         }
       ],
       "images": [
@@ -107,9 +112,14 @@
     "9x19vsn_kapkan": {
       "config": [
         {
-          "duration": 1000,
-          "dx": 0,
+          "duration": 700,
+          "dx": -9,
           "dy": 100
+        },
+        {
+          "duration": 1000,
+          "dx": -9,
+          "dy": 115
         }
       ],
       "images": [
@@ -120,9 +130,14 @@
     "9x19vsn_tachanka": {
       "config": [
         {
+          "duration": 700,
+          "dx": -9,
+          "dy": 250
+        },
+        {
           "duration": 1000,
-          "dx": 0,
-          "dy": 100
+          "dx": -9,
+          "dy": 275
         }
       ],
       "images": [
@@ -135,12 +150,12 @@
         {
           "duration": 700,
           "dx": -10,
-          "dy": 189
+          "dy": 270
         },
         {
           "duration": 700,
           "dx": -10,
-          "dy": 210
+          "dy": 300
         }
       ],
       "images": [
@@ -151,13 +166,8 @@
       "config": [
         {
           "duration": 1000,
-          "dx": -8,
-          "dy": 110
-        },
-        {
-          "duration": 1000,
-          "dx": -8,
-          "dy": 120
+          "dx": -12,
+          "dy": 170
         }
       ],
       "images": [
@@ -167,9 +177,14 @@
     "alda556": {
       "config": [
         {
+          "duration": 1300,
+          "dx": -3,
+          "dy": 125
+        },
+        {
           "duration": 1000,
-          "dx": 0,
-          "dy": 100
+          "dx": -7,
+          "dy": 145
         }
       ],
       "images": [
@@ -181,7 +196,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 100
+          "dy": 225
         }
       ],
       "images": [
@@ -193,12 +208,12 @@
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 145
+          "dy": 215
         },
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 160
+          "dy": 230
         }
       ],
       "images": [
@@ -209,8 +224,13 @@
       "config": [
         {
           "duration": 1000,
-          "dx": -8,
-          "dy": 145
+          "dx": -10,
+          "dy": 215
+        },
+        {
+          "duration": 1000,
+          "dx": -15,
+          "dy": 225
         }
       ],
       "images": [
@@ -222,17 +242,17 @@
         {
           "duration": 600,
           "dx": 15,
-          "dy": 200
+          "dy": 300
         },
         {
           "duration": 500,
-          "dx": 20,
-          "dy": 220
+          "dx": 25,
+          "dy": 320
         },
         {
           "duration": 500,
-          "dx": 20,
-          "dy": 230
+          "dx": 25,
+          "dy": 330
         }
       ],
       "images": [
@@ -243,9 +263,19 @@
     "auga2_wamai": {
       "config": [
         {
-          "duration": 1000,
-          "dx": 0,
-          "dy": 100
+          "duration": 600,
+          "dx": 10,
+          "dy": 120
+        },
+        {
+          "duration": 500,
+          "dx": 15,
+          "dy": 130
+        },
+        {
+          "duration": 500,
+          "dx": 20,
+          "dy": 135
         }
       ],
       "images": [
@@ -258,7 +288,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 129
+          "dy": 185
         }
       ],
       "images": [
@@ -270,12 +300,12 @@
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 205
+          "dy": 305
         },
         {
           "duration": 700,
           "dx": -7,
-          "dy": 235
+          "dy": 335
         }
       ],
       "images": [
@@ -287,12 +317,12 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 200
+          "dy": 290
         },
         {
           "duration": 1000,
           "dx": -17,
-          "dy": 210
+          "dy": 310
         }
       ],
       "images": [
@@ -303,13 +333,13 @@
       "config": [
         {
           "duration": 1000,
-          "dx": -4,
-          "dy": 67
+          "dx": -5,
+          "dy": 110
         },
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 67
+          "dy": 115
         }
       ],
       "images": [
@@ -321,12 +351,12 @@
         {
           "duration": 300,
           "dx": 0,
-          "dy": 320
+          "dy": 430
         },
         {
           "duration": 500,
           "dx": -10,
-          "dy": 320
+          "dy": 480
         }
       ],
       "images": [
@@ -337,13 +367,13 @@
       "config": [
         {
           "duration": 1000,
-          "dx": -8,
-          "dy": 165
+          "dx": -10,
+          "dy": 600
         },
         {
           "duration": 1000,
-          "dx": -8,
-          "dy": 185
+          "dx": -10,
+          "dy": 600
         }
       ],
       "images": [
