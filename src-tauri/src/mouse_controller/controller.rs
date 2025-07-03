@@ -9,7 +9,7 @@ use crate::mouse_controller::utils::{send_mouse_input, should_run};
 use crate::patterns::{PatternCollection, Sensitivity, Step, Steps};
 
 /// Default sleep duration between pattern processing iterations
-const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 16;
+const DEFAULT_THREAD_SLEEP_DURATION_MS: u64 = 24;
 
 /// Controller for programmatic mouse movements
 ///
@@ -74,13 +74,15 @@ impl MouseController {
                 // Apply sensitivity to dx and dy values
                 // Higher sensitivity values make the movement smaller (divided by sensitivity)
                 step.adjusted_dx = if state.sensitivity.x > 1.0 {
-                    (step.dx as f32 / state.sensitivity.x) as i32
+                    let calculated = (step.dx as f32 / state.sensitivity.x) as i32;
+                    if calculated == 0 { 1 } else { calculated }
                 } else {
                     step.dx
                 };
 
                 step.adjusted_dy = if state.sensitivity.y > 1.0 {
-                    (step.dy as f32 / state.sensitivity.y) as i32
+                    let calculated = (step.dy as f32 / state.sensitivity.y) as i32;
+                    if calculated == 0 { 1 } else { calculated }
                 } else {
                     step.dy
                 };
@@ -137,13 +139,15 @@ impl MouseController {
                     // Apply sensitivity to dx and dy values
                     // Higher sensitivity values make the movement smaller (divided by sensitivity)
                     step.adjusted_dx = if sensitivity_x > 1.0 {
-                        (step.dx as f32 / sensitivity_x) as i32
+                        let calculated = (step.dx as f32 / sensitivity_x) as i32;
+                        if calculated == 0 { 1 } else { calculated }
                     } else {
                         step.dx
                     };
 
                     step.adjusted_dy = if sensitivity_y > 1.0 {
-                        (step.dy as f32 / sensitivity_y) as i32
+                        let calculated = (step.dy as f32 / sensitivity_y) as i32;
+                        if calculated == 0 { 1 } else { calculated }
                     } else {
                         step.dy
                     };
@@ -262,6 +266,9 @@ impl MouseController {
                     if let Some(step) = &current_step {
                         // Use pre-calculated adjusted values
                         // Send mouse input based on the adjusted values
+
+                        println!("{} {}", step.adjusted_dx, step.adjusted_dy);
+
                         if let Err(e) = send_mouse_input(step.adjusted_dx, step.adjusted_dy) {
                             error!("Failed to send mouse input: {}", e);
                         }

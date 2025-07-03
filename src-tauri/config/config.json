@@ -1,15 +1,20 @@
 {
   "sensitivity": {
-    "x": 1.0,
-    "y": 1.0
+    "x": 5.0,
+    "y": 5.0
   },
   "patterns": {
     "416ccarbine": {
       "config": [
         {
           "duration": 1000,
-          "dx": 0,
-          "dy": 100
+          "dx": -3,
+          "dy": 80
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 85
         }
       ],
       "images": [
@@ -21,7 +26,7 @@
         {
           "duration": 1000,
           "dx": 0,
-          "dy": 150
+          "dy": 125
         }
       ],
       "images": [
