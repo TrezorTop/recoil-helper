@@ -96,15 +96,11 @@ fn detect_and_set_pattern(
 ) -> Option<String> {
     // Detect which pattern is on the screen
     if let Some(pattern_name) = pattern_collection.detect_pattern() {
-        println!("Detected pattern: {}", pattern_name);
-
         // Set the pattern for the controller
         mouse_controller.update_steps(pattern_collection.get_pattern(&pattern_name).config);
 
         Some(pattern_name)
     } else {
-        println!("No pattern detected");
-
         // Set null (None) to mouse_controller when no pattern is detected
         mouse_controller.clear_steps();
 

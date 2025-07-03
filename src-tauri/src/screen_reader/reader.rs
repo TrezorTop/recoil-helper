@@ -144,8 +144,6 @@ pub fn match_template(screen_mat: &Mat, image_path: String) -> bool {
         return false; // Skip this image if min_max_loc fails
     }
 
-    println!("{:?} {:?} {:?}", min_val, max_val, image_path);
-
     // If the image is found on the screen, return true
     max_val > MAX_IMAGE_THRESHOLD
 }

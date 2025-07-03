@@ -45,7 +45,7 @@ impl MouseController {
 
         // Create a shared state with an empty pattern and sensitivity settings
         let state = Arc::new(std::sync::RwLock::new(
-            MouseControllerState::with_pattern_and_sensitivity(vec![], sensitivity)
+            MouseControllerState::with_pattern_and_sensitivity(vec![], sensitivity),
         ));
 
         // Start the controller thread
@@ -205,11 +205,7 @@ impl MouseController {
                                 (vec![], guard.enabled, true)
                             } else {
                                 // Only clone the pattern, not the entire state
-                                (
-                                    guard.steps.as_ref().unwrap().clone(), 
-                                    guard.enabled, 
-                                    false
-                                )
+                                (guard.steps.as_ref().unwrap().clone(), guard.enabled, false)
                             }
                         }
                         Err(e) => {
