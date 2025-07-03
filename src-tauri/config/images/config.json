@@ -162,7 +162,7 @@
         "ak12.png"
       ]
     },
-    "auga2": {
+    "auga2_iq": {
       "config": [
         {
           "duration": 600,
@@ -181,7 +181,31 @@
         }
       ],
       "images": [
-        "auga2.png"
+        "auga2.png",
+        "iq.png"
+      ]
+    },
+    "auga2_wamai": {
+      "config": [
+        {
+          "duration": 400,
+          "dx": 10,
+          "dy": 80
+        },
+        {
+          "duration": 600,
+          "dx": 9,
+          "dy": 87
+        },
+        {
+          "duration": 600,
+          "dx": 8,
+          "dy": 93
+        }
+      ],
+      "images": [
+        "auga2.png",
+        "wamai.png"
       ]
     },
     "c8sfw": {
@@ -330,7 +354,7 @@
         "v308.png"
       ]
     },
-    "spear308": {
+    "spear308_finka": {
       "config": [
         {
           "duration": 1000,
@@ -349,7 +373,31 @@
         }
       ],
       "images": [
-        "spear308.png"
+        "spear308.png",
+        "finka.png"
+      ]
+    },
+    "spear308_thunderbird": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 80
+        },
+        {
+          "duration": 1000,
+          "dx": -4,
+          "dy": 90
+        },
+        {
+          "duration": 1000,
+          "dx": -4,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "spear308.png",
+        "thunderbird.png"
       ]
     },
     "arx200": {
@@ -607,7 +655,7 @@
         "smg11.png"
       ]
     },
-    "ump45castle": {
+    "ump45_castle": {
       "config": [
         {
           "duration": 700,
@@ -621,25 +669,418 @@
         }
       ],
       "images": [
-        "ump45.png"
+        "ump45.png",
+        "castle.png"
       ]
     },
-    "ump45pulse": {
+    "ump45_pulse": {
       "config": [
         {
           "duration": 700,
           "dx": 0,
-          "dy": 40
+          "dy": 41
         },
         {
           "duration": 1000,
           "dx": -5,
-          "dy": 40
+          "dy": 41
         }
       ],
       "images": [
         "ump45.png",
         "pulse.png"
+      ]
+    },
+    "mp5_doc": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 170
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 190
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "doc.png"
+      ]
+    },
+    "mp5_rook": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 170
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 190
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "rook.png"
+      ]
+    },
+    "mp5_melusi": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 65
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 80
+        }
+      ],
+      "images": [
+        "mp5.png",
+        "melusi.png"
+      ]
+    },
+    "9x19vsn_kapkan": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 70
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 78
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "kapkan.png"
+      ]
+    },
+    "9x19vsn_azami": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 70
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 78
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "azami.png"
+      ]
+    },
+    "9x19vsn_tachanka": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -8,
+          "dy": 175
+        },
+        {
+          "duration": 1000,
+          "dx": -9,
+          "dy": 190
+        }
+      ],
+      "images": [
+        "9x19vsn.png",
+        "tachanka.png"
+      ]
+    },
+    "416ccarbine": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 83
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 87
+        }
+      ],
+      "images": [
+        "416ccarbine.png"
+      ]
+    },
+    "mp7": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 4,
+          "dy": 83
+        },
+        {
+          "duration": 1000,
+          "dx": 5,
+          "dy": 87
+        }
+      ],
+      "images": [
+        "mp7.png"
+      ]
+    },
+    "9mmc1": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 100
+        },
+        {
+          "duration": 1000,
+          "dx": 7,
+          "dy": 100
+        }
+      ],
+      "images": [
+        "9mmc1.png"
+      ]
+    },
+    "mpx": {
+      "config": [
+        {
+          "duration": 500,
+          "dx": -3,
+          "dy": 65
+        },
+        {
+          "duration": 500,
+          "dx": -5,
+          "dy": 65
+        },
+        {
+          "duration": 1000,
+          "dx": -4,
+          "dy": 70
+        }
+      ],
+      "images": [
+        "mpx.png"
+      ]
+    },
+    "mp5sd": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 155
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 173
+        }
+      ],
+      "images": [
+        "mp5sd.png"
+      ]
+    },
+    "vector45acp": {
+      "config": [
+        {
+          "duration": 500,
+          "dx": 0,
+          "dy": 90
+        },
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 110
+        }
+      ],
+      "images": [
+        "vector45acp.png"
+      ]
+    },
+    "t5smg": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 75
+        },
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 90
+        }
+      ],
+      "images": [
+        "t5smg.png"
+      ]
+    },
+    "scorpionevo3a1": {
+      "config": [
+        {
+          "duration": 500,
+          "dx": 14,
+          "dy": 90
+        },
+        {
+          "duration": 1000,
+          "dx": 25,
+          "dy": 110
+        }
+      ],
+      "images": [
+        "scorpionevo3a1.png"
+      ]
+    },
+    "k1a": {
+      "config": [
+        {
+          "duration": 500,
+          "dx": -5,
+          "dy": 75
+        },
+        {
+          "duration": 1000,
+          "dx": -7,
+          "dy": 75
+        }
+      ],
+      "images": [
+        "k1a.png"
+      ]
+    },
+    "alda556": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 85
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 95
+        },
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 95
+        }
+      ],
+      "images": [
+        "alda556.png"
+      ]
+    },
+    "mx4storm": {
+      "config": [
+        {
+          "duration": 500,
+          "dx": 0,
+          "dy": 84
+        },
+        {
+          "duration": 1000,
+          "dx": 10,
+          "dy": 88
+        }
+      ],
+      "images": [
+        "mx4storm.png"
+      ]
+    },
+    "tcsg12": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 275
+        }
+      ],
+      "images": [
+        "tcsg12.png"
+      ]
+    },
+    "p10roni": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 10,
+          "dy": 75
+        }
+      ],
+      "images": [
+        "p10roni.png"
+      ]
+    },
+    "uzk50gi": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 65
+        },
+        {
+          "duration": 1000,
+          "dx": 6,
+          "dy": 80
+        }
+      ],
+      "images": [
+        "uzk50gi.png"
+      ]
+    },
+    "p90": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 75
+        },
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 85
+        }
+      ],
+      "images": [
+        "p90.png"
+      ]
+    },
+    "ar1550": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": 0,
+          "dy": 170
+        }
+      ],
+      "images": [
+        "ar1550.png"
+      ]
+    },
+    "pcx33": {
+      "config": [
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 55
+        },
+        {
+          "duration": 1000,
+          "dx": -5,
+          "dy": 65
+        }
+      ],
+      "images": [
+        "pcx33.png"
       ]
     }
   }
